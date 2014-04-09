@@ -24,8 +24,9 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.cluster.Node;
 import voldemort.utils.ByteUtils;
 import voldemort.utils.FnvHashFunction;
@@ -53,7 +54,7 @@ public class ConsistentRoutingStrategy implements RoutingStrategy {
     private final Node[] partitionToNode;
     private final HashFunction hash;
 
-    private static final Logger logger = Logger.getLogger(ConsistentRoutingStrategy.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConsistentRoutingStrategy.class);
 
     public ConsistentRoutingStrategy(Collection<Node> nodes, int numReplicas) {
         this(new FnvHashFunction(), nodes, numReplicas);

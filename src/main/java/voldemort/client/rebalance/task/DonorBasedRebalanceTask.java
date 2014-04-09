@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.rebalance.RebalanceClientConfig;
 import voldemort.client.rebalance.RebalancePartitionsInfo;
@@ -20,7 +21,7 @@ import voldemort.utils.RebalanceUtils;
  */
 public class DonorBasedRebalanceTask extends RebalanceTask {
 
-    protected static final Logger logger = Logger.getLogger(DonorBasedRebalanceTask.class);
+    protected static final Logger logger = LoggerFactory.getLogger(DonorBasedRebalanceTask.class);
 
     private final int donorNodeId;
 

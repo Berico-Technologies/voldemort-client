@@ -25,7 +25,7 @@ abstract class BdbIterator<T> implements ClosableIterator<T> {
                 isOpen = false;
             }
         } catch(DatabaseException e) {
-            bdbEngine.getLogger().error(e);
+            bdbEngine.getLogger().error("", e);
         }
     }
 

@@ -18,8 +18,9 @@ package voldemort.store.logging;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.store.DelegatingStore;
 import voldemort.store.Store;
@@ -68,7 +69,7 @@ public class LoggingStore<K, V, T> extends DelegatingStore<K, V, T> {
      */
     public LoggingStore(Store<K, V, T> store, String instance, Time time) {
         super(store);
-        this.logger = Logger.getLogger(store.getClass());
+        this.logger = LoggerFactory.getLogger(store.getClass());
         this.time = time;
         this.instanceName = instance == null ? ": " : instance + ": ";
     }

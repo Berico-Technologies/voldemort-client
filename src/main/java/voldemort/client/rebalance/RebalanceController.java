@@ -26,8 +26,9 @@ import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Semaphore;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.rebalance.task.DonorBasedRebalanceTask;
@@ -47,7 +48,7 @@ import com.google.common.collect.TreeMultimap;
 
 public class RebalanceController {
 
-    private static final Logger logger = Logger.getLogger(RebalanceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RebalanceController.class);
 
     private static final DecimalFormat decimalFormatter = new DecimalFormat("#.##");
 

@@ -20,8 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.concurrency.Threadsafe;
 import voldemort.annotations.jmx.JmxManaged;
@@ -56,7 +57,7 @@ import com.google.common.collect.Maps;
 @JmxManaged(description = "A voldemort client")
 public class DefaultStoreClient<K, V> implements StoreClient<K, V> {
 
-    private final Logger logger = Logger.getLogger(DefaultStoreClient.class);
+    private final Logger logger = LoggerFactory.getLogger(DefaultStoreClient.class);
     private final StoreClientFactory storeFactory;
 
     private final int metadataRefreshAttempts;

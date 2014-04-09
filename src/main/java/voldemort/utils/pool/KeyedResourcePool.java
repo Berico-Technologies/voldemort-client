@@ -12,8 +12,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.utils.Time;
 import voldemort.utils.Utils;
 
@@ -27,7 +28,7 @@ import voldemort.utils.Utils;
  */
 public class KeyedResourcePool<K, V> {
 
-    private static final Logger logger = Logger.getLogger(KeyedResourcePool.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(KeyedResourcePool.class.getName());
 
     private final ResourceFactory<K, V> objectFactory;
     private final ConcurrentMap<K, Pool<V>> resourcesMap;

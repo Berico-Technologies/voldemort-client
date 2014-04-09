@@ -16,8 +16,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.protocol.admin.AdminClientConfig;
 import voldemort.cluster.Cluster;
@@ -37,7 +38,7 @@ import com.google.common.collect.ImmutableSet;
  */
 public abstract class StoreSwapper {
 
-    private static final Logger logger = Logger.getLogger(StoreSwapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(StoreSwapper.class);
 
     protected final Cluster cluster;
     protected final ExecutorService executor;

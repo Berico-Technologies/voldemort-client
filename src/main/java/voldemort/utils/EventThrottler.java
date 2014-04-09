@@ -1,7 +1,8 @@
 package voldemort.utils;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.concurrency.NotThreadsafe;
 
@@ -21,7 +22,7 @@ import voldemort.annotations.concurrency.NotThreadsafe;
 @NotThreadsafe
 public class EventThrottler {
 
-    private final static Logger logger = Logger.getLogger(EventThrottler.class);
+    private final static Logger logger = LoggerFactory.getLogger(EventThrottler.class);
     private final static long DEFAULT_CHECK_INTERVAL_MS = 50;
 
     private final Time time;

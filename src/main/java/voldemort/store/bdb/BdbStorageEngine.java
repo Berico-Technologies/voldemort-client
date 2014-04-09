@@ -26,8 +26,9 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.jmx.JmxOperation;
 import voldemort.server.protocol.admin.AsyncOperationStatus;
@@ -68,7 +69,7 @@ import com.sleepycat.je.Transaction;
  */
 public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]>, NativeBackupable {
 
-    private static final Logger logger = Logger.getLogger(BdbStorageEngine.class);
+    private static final Logger logger = LoggerFactory.getLogger(BdbStorageEngine.class);
     private static final Hex hexCodec = new Hex();
 
     private final String name;
@@ -107,7 +108,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 cursor.setCacheMode(CacheMode.EVICT_BIN);
             return new BdbEntriesIterator(cursor, this);
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         }
     }
@@ -120,7 +121,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 cursor.setCacheMode(CacheMode.EVICT_BIN);
             return new BdbKeysIterator(cursor, this);
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         }
     }
@@ -149,7 +150,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 environment.truncateDatabase(transaction, this.getName(), false);
                 succeeded = true;
             } catch(DatabaseException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new VoldemortException("Failed to truncate Bdb store " + getName(), e);
 
             } finally {
@@ -176,7 +177,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 attemptAbort(transaction);
             }
         } catch(Exception e) {
-            logger.error(e);
+            logger.error("", e);
         }
     }
 
@@ -238,7 +239,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 return Collections.emptyList();
             }
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         } finally {
             if(logger.isTraceEnabled()) {
@@ -336,7 +337,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
             succeeded = true;
 
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         } finally {
             if(succeeded)
@@ -414,7 +415,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                 return numDeletedVersions > 0;
             }
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         } finally {
             attemptCommit(transaction);
@@ -449,7 +450,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
             if(this.isOpen.compareAndSet(true, false))
                 this.getBdbDatabase().close();
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException("Shutdown failed.", e);
         }
     }
@@ -480,7 +481,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
             config.setFast(setFast);
             return this.getBdbDatabase().getStats(config);
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new VoldemortException(e);
         }
     }
@@ -551,7 +552,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                     this.cache.add(Pair.create(key, val));
                 return true;
             } catch(DatabaseException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new PersistenceFailureException(e);
             }
         }
@@ -599,7 +600,7 @@ public class BdbStorageEngine implements StorageEngine<ByteArray, byte[], byte[]
                     current = new ByteArray(keyEntry.getData());
                 return true;
             } catch(DatabaseException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new PersistenceFailureException(e);
             }
         }

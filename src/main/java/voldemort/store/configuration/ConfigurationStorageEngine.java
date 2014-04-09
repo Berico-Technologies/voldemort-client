@@ -24,8 +24,9 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.store.StorageEngine;
 import voldemort.store.StoreCapabilityType;
@@ -47,7 +48,7 @@ import voldemort.versioning.Versioned;
  */
 public class ConfigurationStorageEngine implements StorageEngine<String, String, String> {
 
-    private final static Logger logger = Logger.getLogger(ConfigurationStorageEngine.class);
+    private final static Logger logger = LoggerFactory.getLogger(ConfigurationStorageEngine.class);
     private final String name;
     private final File directory;
 

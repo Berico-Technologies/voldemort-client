@@ -21,7 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Network class Loader to load Classes on different JVMs needed to provide a
@@ -32,7 +33,7 @@ import org.apache.log4j.Logger;
  */
 public class NetworkClassLoader extends ClassLoader {
 
-    private final static Logger logger = Logger.getLogger(NetworkClassLoader.class);
+    private final static Logger logger = LoggerFactory.getLogger(NetworkClassLoader.class);
 
     public NetworkClassLoader(ClassLoader parentClassLoader) {
         super(parentClassLoader);

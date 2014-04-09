@@ -18,7 +18,7 @@ package voldemort.cluster.failuredetector;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import org.apache.log4j.Level;
+
 
 import voldemort.annotations.jmx.JmxManaged;
 import voldemort.cluster.Node;
@@ -51,7 +51,7 @@ public class AsyncRecoveryFailureDetector extends AbstractFailureDetector implem
         recoveryThread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
             public void uncaughtException(Thread t, Throwable e) {
-                if(logger.isEnabledFor(Level.ERROR))
+                if(logger.isErrorEnabled())
                     logger.error("Uncaught exception in failure detector recovery thread:", e);
             }
         });
@@ -121,10 +121,10 @@ public class AsyncRecoveryFailureDetector extends AbstractFailureDetector implem
 
                     nodeRecovered(node);
                 } catch(UnreachableStoreException e) {
-                    if(logger.isEnabledFor(Level.WARN))
+                    if(logger.isWarnEnabled())
                         logger.warn("Node " + node.getId() + " still unavailable", e);
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.ERROR))
+                    if(logger.isErrorEnabled())
                         logger.error("Node " + node.getId() + " unavailable due to error", e);
                 }
             }

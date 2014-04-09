@@ -43,8 +43,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.serialization.Serializer;
 import voldemort.utils.ByteUtils;
@@ -61,7 +62,7 @@ import com.google.common.collect.AbstractIterator;
  */
 public class ExternalSorter<V> {
 
-    public static final Logger logger = Logger.getLogger(ExternalSorter.class);
+    public static final Logger logger = LoggerFactory.getLogger(ExternalSorter.class);
 
     private final Serializer<V> serializer;
     private final Comparator<V> comparator;

@@ -19,8 +19,9 @@ package voldemort.store.routed;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.TimeoutConfig;
 import voldemort.cluster.Cluster;
@@ -51,7 +52,7 @@ public abstract class RoutedStore implements Store<ByteArray, byte[], byte[]> {
     protected final StoreDefinition storeDef;
     protected final FailureDetector failureDetector;
     protected volatile RoutingStrategy routingStrategy;
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     protected RoutedStore(String name,
                           Map<Integer, Store<ByteArray, byte[], byte[]>> innerStores,

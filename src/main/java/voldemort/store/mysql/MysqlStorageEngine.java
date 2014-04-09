@@ -25,8 +25,9 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.store.NoSuchCapabilityException;
 import voldemort.store.PersistenceFailureException;
@@ -51,7 +52,7 @@ import com.google.common.collect.Lists;
  */
 public class MysqlStorageEngine implements StorageEngine<ByteArray, byte[], byte[]> {
 
-    private static final Logger logger = Logger.getLogger(MysqlStorageEngine.class);
+    private static final Logger logger = LoggerFactory.getLogger(MysqlStorageEngine.class);
     private static int MYSQL_ERR_DUP_KEY = 1022;
     private static int MYSQL_ERR_DUP_ENTRY = 1062;
 

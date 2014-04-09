@@ -2,8 +2,9 @@ package voldemort.store.stats;
 
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.concurrency.Threadsafe;
 
 /**
@@ -21,7 +22,7 @@ public class Histogram {
     private final int[] buckets;
     private final int[] bounds;
     private int size;
-    private static final Logger logger = Logger.getLogger(Histogram.class);
+    private static final Logger logger = LoggerFactory.getLogger(Histogram.class);
 
     /**
      * Initialize an empty histogram

@@ -21,8 +21,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.concurrency.Threadsafe;
 import voldemort.utils.Utils;
 
@@ -36,7 +37,7 @@ import com.google.common.collect.ImmutableList;
 @Threadsafe
 public class Node implements Serializable, Comparable<Node> {
 
-    private static final Logger logger = Logger.getLogger(Node.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(Node.class.getName());
 
     private static final long serialVersionUID = 1;
     private final int id;

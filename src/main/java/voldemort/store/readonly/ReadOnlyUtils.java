@@ -10,8 +10,9 @@ import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.utils.ByteUtils;
 import voldemort.utils.Pair;
@@ -21,7 +22,7 @@ public class ReadOnlyUtils {
 
     public static final int POSITION_SIZE = 4;
 
-    private static Logger logger = Logger.getLogger(ReadOnlyUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(ReadOnlyUtils.class);
 
     public static int chunk(byte[] key, int numChunks) {
         // max handles abs(Integer.MIN_VALUE)

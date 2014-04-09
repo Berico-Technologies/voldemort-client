@@ -22,9 +22,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.jmx.JmxGetter;
 import voldemort.cluster.Node;
 import voldemort.store.UnreachableStoreException;
@@ -47,7 +48,7 @@ public abstract class AbstractFailureDetector implements FailureDetector {
     // host swaps)
     protected final Map<Integer, CompositeNodeStatus> idNodeStatusMap;
 
-    protected final Logger logger = Logger.getLogger(getClass().getName());
+    protected final Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     protected AbstractFailureDetector(FailureDetectorConfig failureDetectorConfig) {
         if(failureDetectorConfig == null)
@@ -175,8 +176,8 @@ public abstract class AbstractFailureDetector implements FailureDetector {
                 try {
                     fdl.nodeAvailable(node);
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(e, e);
+                    if(logger.isWarnEnabled())
+                        logger.warn(e.getMessage(), e);
                 }
             }
         }
@@ -185,7 +186,7 @@ public abstract class AbstractFailureDetector implements FailureDetector {
     protected void setUnavailable(Node node, UnreachableStoreException e) {
         NodeStatus nodeStatus = getNodeStatus(node);
 
-        if(logger.isEnabledFor(Level.WARN)) {
+        if(logger.isWarnEnabled()) {
             if(e != null)
                 logger.warn("Node " + node.getId() + " set as unavailable", e);
             else
@@ -207,8 +208,8 @@ public abstract class AbstractFailureDetector implements FailureDetector {
                 try {
                     fdl.nodeUnavailable(node);
                 } catch(Exception ex) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(ex, ex);
+                    if(logger.isWarnEnabled())
+                        logger.warn(ex.getMessage(), ex);
                 }
             }
         }
@@ -219,7 +220,7 @@ public abstract class AbstractFailureDetector implements FailureDetector {
         CompositeNodeStatus currentNodeStatus = idNodeStatusMap.get(node.getId());
 
         if(currentNodeStatus == null || !currentNodeStatus.getNode().isEqualState(node)) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn("creating new node status for node " + node.getId()
                             + " for failure detector");
 

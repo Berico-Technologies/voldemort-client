@@ -15,8 +15,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.protocol.admin.AdminClientConfig;
@@ -49,7 +50,7 @@ import com.google.common.collect.Sets;
 @SuppressWarnings("unchecked")
 public class StreamingSlopPusherJob implements Runnable {
 
-    private final static Logger logger = Logger.getLogger(StreamingSlopPusherJob.class.getName());
+    private final static Logger logger = LoggerFactory.getLogger(StreamingSlopPusherJob.class.getName());
     public final static String TYPE_NAME = "streaming";
 
     private final static Versioned<Slop> END = Versioned.value(null);
@@ -213,7 +214,7 @@ public class StreamingSlopPusherJob implements Runnable {
             logger.warn("Interrupted exception", e);
             terminatedEarly = true;
         } catch(Exception e) {
-            logger.error(e, e);
+            logger.error(e.getMessage(), e);
             terminatedEarly = true;
         } finally {
             try {

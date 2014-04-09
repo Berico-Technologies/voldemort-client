@@ -22,8 +22,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.jmx.JmxOperation;
 import voldemort.routing.RoutingStrategy;
@@ -60,7 +61,7 @@ public class BdbStorageConfiguration implements StorageConfiguration {
     public static final String TYPE_NAME = "bdb";
     private static final String SHARED_ENV_KEY = "shared";
 
-    private static Logger logger = Logger.getLogger(BdbStorageConfiguration.class);
+    private static Logger logger = LoggerFactory.getLogger(BdbStorageConfiguration.class);
     private final Object lock = new Object();
     private final Map<String, Environment> environments = Maps.newHashMap();
     private final EnvironmentConfig environmentConfig;

@@ -38,8 +38,9 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.protocol.admin.AdminClientConfig;
@@ -72,7 +73,7 @@ import com.google.common.collect.Sets;
  */
 public class RebalanceUtils {
 
-    private static Logger logger = Logger.getLogger(RebalanceUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(RebalanceUtils.class);
 
     public final static List<String> canRebalanceList = Arrays.asList(BdbStorageConfiguration.TYPE_NAME,
                                                                       ReadOnlyStorageConfiguration.TYPE_NAME);

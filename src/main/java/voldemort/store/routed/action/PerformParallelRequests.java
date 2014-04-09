@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Level;
+
 
 import voldemort.cluster.Node;
 import voldemort.cluster.failuredetector.FailureDetector;
@@ -156,8 +156,8 @@ public class PerformParallelRequests<V, PD extends BasicPipelineData<V>> extends
         try {
             latch.await(timeoutMs, TimeUnit.MILLISECONDS);
         } catch(InterruptedException e) {
-            if(logger.isEnabledFor(Level.WARN))
-                logger.warn(e, e);
+            if(logger.isWarnEnabled())
+                logger.warn(e.getMessage(), e);
         }
 
         for(Response<ByteArray, Object> response: responses.values()) {

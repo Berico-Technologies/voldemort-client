@@ -20,14 +20,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.locks.ReadWriteLock;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import voldemort.utils.ByteUtils;
 import voldemort.utils.ClosableIterator;
 
 abstract class DataFileChunkSetIterator<T> implements ClosableIterator<T> {
 
-    private static Logger logger = Logger.getLogger(DataFileChunkSetIterator.class);
+    private static Logger logger = LoggerFactory.getLogger(DataFileChunkSetIterator.class);
 
     private DataFileChunkSet dataFileChunkSet;
     private int currentChunk;

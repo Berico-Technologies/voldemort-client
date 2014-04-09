@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Level;
+
 
 import voldemort.cluster.Node;
 import voldemort.cluster.failuredetector.FailureDetector;
@@ -155,8 +155,8 @@ public class PerformParallelDeleteRequests<V, PD extends BasicPipelineData<V>> e
                 blocksLatch.await(remainingNs, TimeUnit.NANOSECONDS);
             }
         } catch(InterruptedException e) {
-            if(logger.isEnabledFor(Level.WARN))
-                logger.warn(e, e);
+            if(logger.isWarnEnabled())
+                logger.warn(e.getMessage(), e);
         }
 
         for(Entry<Integer, Response<ByteArray, Object>> responseEntry: responses.entrySet()) {
@@ -191,8 +191,8 @@ public class PerformParallelDeleteRequests<V, PD extends BasicPipelineData<V>> e
                 try {
                     attemptsLatch.await(remainingNs, TimeUnit.NANOSECONDS);
                 } catch(InterruptedException e) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(e, e);
+                    if(logger.isWarnEnabled())
+                        logger.warn(e.getMessage(), e);
                 }
 
                 for(Entry<Integer, Response<ByteArray, Object>> responseEntry: responses.entrySet()) {
@@ -246,8 +246,8 @@ public class PerformParallelDeleteRequests<V, PD extends BasicPipelineData<V>> e
                         try {
                             attemptsLatch.await(timeoutMs - timeMs, TimeUnit.MILLISECONDS);
                         } catch(InterruptedException e) {
-                            if(logger.isEnabledFor(Level.WARN))
-                                logger.warn(e, e);
+                            if(logger.isWarnEnabled())
+                                logger.warn(e.getMessage(), e);
                         }
 
                         for(Entry<Integer, Response<ByteArray, Object>> responseEntry: responses.entrySet()) {

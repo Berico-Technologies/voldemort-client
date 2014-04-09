@@ -3,8 +3,9 @@ package voldemort.client.rebalance.task;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.client.rebalance.RebalanceClientConfig;
@@ -25,7 +26,7 @@ import com.google.common.collect.Lists;
  */
 public class StealerBasedRebalanceTask extends RebalanceTask {
 
-    private static final Logger logger = Logger.getLogger(StealerBasedRebalanceTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(StealerBasedRebalanceTask.class);
 
     private final int stealerNodeId;
 

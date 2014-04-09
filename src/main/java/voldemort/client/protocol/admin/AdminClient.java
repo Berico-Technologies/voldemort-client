@@ -42,8 +42,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.ClientConfig;
 import voldemort.client.SocketStoreClientFactory;
@@ -114,7 +115,7 @@ import com.google.protobuf.Message;
  */
 public class AdminClient {
 
-    private static final Logger logger = Logger.getLogger(AdminClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminClient.class);
     private final ErrorCodeMapper errorMapper;
     private final SocketPool pool;
     private final NetworkClassLoader networkClassLoader;

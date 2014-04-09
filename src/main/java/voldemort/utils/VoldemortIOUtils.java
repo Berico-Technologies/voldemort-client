@@ -26,13 +26,14 @@ import java.io.Writer;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VoldemortIOUtils {
 
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
-    private static final Logger logger = Logger.getLogger(VoldemortIOUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(VoldemortIOUtils.class);
 
     public static String toString(final InputStream input, final long limit) throws IOException {
         return toString(input, null, limit);

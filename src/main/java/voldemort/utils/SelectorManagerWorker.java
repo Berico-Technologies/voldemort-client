@@ -26,8 +26,8 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * SelectorManagerWorker manages a Selector, SocketChannel, and IO streams
@@ -58,7 +58,7 @@ public abstract class SelectorManagerWorker implements Runnable {
 
     protected final AtomicBoolean isClosed;
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     public SelectorManagerWorker(Selector selector,
                                  SocketChannel socketChannel,
@@ -115,7 +115,7 @@ public abstract class SelectorManagerWorker implements Runnable {
                         + e.getMessage());
             close();
         } catch(Throwable t) {
-            if(logger.isEnabledFor(Level.ERROR))
+            if(logger.isErrorEnabled())
                 logger.error(t.getMessage(), t);
 
             close();
@@ -140,14 +140,14 @@ public abstract class SelectorManagerWorker implements Runnable {
         try {
             socketChannel.socket().close();
         } catch(IOException e) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn(e.getMessage(), e);
         }
 
         try {
             socketChannel.close();
         } catch(IOException e) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn(e.getMessage(), e);
         }
 
@@ -158,7 +158,7 @@ public abstract class SelectorManagerWorker implements Runnable {
                 selectionKey.attach(null);
                 selectionKey.cancel();
             } catch(Exception e) {
-                if(logger.isEnabledFor(Level.WARN))
+                if(logger.isWarnEnabled())
                     logger.warn(e.getMessage(), e);
             }
         }

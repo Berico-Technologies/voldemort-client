@@ -16,9 +16,10 @@
 
 package voldemort.store.routed.action;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortApplicationException;
 import voldemort.cluster.Node;
 import voldemort.cluster.failuredetector.FailureDetector;
@@ -36,7 +37,7 @@ public abstract class AbstractAction<K, V, PD extends PipelineData<K, V>> implem
 
     protected final Event completeEvent;
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     protected AbstractAction(PD pipelineData, Event completeEvent) {
         this.pipelineData = Utils.notNull(pipelineData);
@@ -58,7 +59,7 @@ public abstract class AbstractAction<K, V, PD extends PipelineData<K, V>> implem
                                           long requestTime,
                                           Pipeline pipeline,
                                           FailureDetector failureDetector) {
-        if(logger.isEnabledFor(Level.WARN)) {
+        if(logger.isWarnEnabled()) {
             if(e instanceof StoreTimeoutException)
                 logger.warn("Error in " + pipeline.getOperation().getSimpleName() + " on node "
                             + node.getId() + "(" + node.getHost() + ") : " + e.getMessage());
@@ -75,7 +76,7 @@ public abstract class AbstractAction<K, V, PD extends PipelineData<K, V>> implem
             pipelineData.setFatalError((VoldemortApplicationException) e);
             pipeline.abort();
 
-            if(logger.isEnabledFor(Level.TRACE))
+            if(logger.isTraceEnabled())
                 logger.trace("Error is terminal - aborting further pipeline processing");
 
             return true;

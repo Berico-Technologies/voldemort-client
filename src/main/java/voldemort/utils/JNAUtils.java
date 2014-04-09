@@ -1,9 +1,10 @@
 package voldemort.utils;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
 import com.sun.jna.LastErrorException;
 import com.sun.jna.Native;
+import org.slf4j.LoggerFactory;
 
 /**
  * Native functions used through JNA
@@ -11,7 +12,7 @@ import com.sun.jna.Native;
  */
 public class JNAUtils {
 
-    private static final Logger logger = Logger.getLogger(JNAUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JNAUtils.class);
 
     /* Flags for mlock_all */
     private static final int MCL_CURRENT = 1;

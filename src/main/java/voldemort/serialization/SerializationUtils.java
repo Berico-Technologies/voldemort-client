@@ -20,11 +20,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SerializationUtils {
 
-    private static final Logger logger = Logger.getLogger(SerializationUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(SerializationUtils.class);
 
     /**
      * Extracts the java class name from the schema info

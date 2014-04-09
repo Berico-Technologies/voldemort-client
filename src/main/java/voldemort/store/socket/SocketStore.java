@@ -23,9 +23,10 @@ import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.RequestFormat;
 import voldemort.client.protocol.RequestFormatFactory;
@@ -75,7 +76,7 @@ public class SocketStore implements Store<ByteArray, byte[], byte[]>, Nonblockin
     private final SocketDestination destination;
     private final RequestFormat requestFormat;
     private final RequestRoutingType requestRoutingType;
-    private final Logger logger = Logger.getLogger(SocketStore.class);
+    private final Logger logger = LoggerFactory.getLogger(SocketStore.class);
 
     public SocketStore(String storeName,
                        long timeoutMs,
@@ -261,7 +262,7 @@ public class SocketStore implements Store<ByteArray, byte[], byte[]>, Nonblockin
      * 
      * @param <T> Return type
      * 
-     * @param clientRequest ClientRequest implementation used to write the
+     * @param delegate ClientRequest implementation used to write the
      *        request and read the response
      * @param operationName Simple string representing the type of request
      * 
@@ -346,7 +347,7 @@ public class SocketStore implements Store<ByteArray, byte[], byte[]>, Nonblockin
      * 
      * @param <T> Return type
      * 
-     * @param clientRequest ClientRequest implementation used to write the
+     * @param delegate ClientRequest implementation used to write the
      *        request and read the response
      * @param operationName Simple string representing the type of request
      * 
@@ -391,8 +392,8 @@ public class SocketStore implements Store<ByteArray, byte[], byte[]>, Nonblockin
             try {
                 callback.requestComplete(e, 0);
             } catch(Exception ex) {
-                if(logger.isEnabledFor(Level.WARN))
-                    logger.warn(ex, ex);
+                if(logger.isWarnEnabled())
+                    logger.warn(ex.getMessage(), ex);
             }
 
             return;
@@ -450,8 +451,8 @@ public class SocketStore implements Store<ByteArray, byte[], byte[]>, Nonblockin
 
                     callback.requestComplete(o, requestTime);
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(e, e);
+                    if(logger.isWarnEnabled())
+                        logger.warn(e.getMessage(), e);
                 }
             }
         }

@@ -1,13 +1,14 @@
 package voldemort.store.stats;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.jmx.JmxGetter;
 import voldemort.annotations.jmx.JmxManaged;
 import voldemort.annotations.jmx.JmxOperation;
 
 @JmxManaged(description = "Streaming related statistics")
 public class StreamStatsJmx {
-    private final static Logger logger = Logger.getLogger(StreamStatsJmx.class);
+    private final static Logger logger = LoggerFactory.getLogger(StreamStatsJmx.class);
 
     private final StreamStats stats;
 

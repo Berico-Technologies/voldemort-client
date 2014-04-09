@@ -17,7 +17,8 @@
 package voldemort.client;
 
 import com.google.common.collect.ImmutableList;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.jmx.JmxManaged;
 import voldemort.annotations.jmx.JmxOperation;
 import voldemort.cluster.failuredetector.FailureDetector;
@@ -38,7 +39,7 @@ import java.util.concurrent.ConcurrentMap;
 @JmxManaged(description = "A StoreClientFactory which caches clients")
 public class CachingStoreClientFactory implements StoreClientFactory {
 
-    private final static Logger logger = Logger.getLogger(CachingStoreClientFactory.class);
+    private final static Logger logger = LoggerFactory.getLogger(CachingStoreClientFactory.class);
 
     private final StoreClientFactory inner;
     private final ConcurrentMap<Pair<String, Object>, StoreClient<?, ?>> cache;

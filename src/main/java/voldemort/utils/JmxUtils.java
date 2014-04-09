@@ -45,8 +45,9 @@ import javax.management.modelmbean.ModelMBeanNotificationInfo;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.management.modelmbean.RequiredModelMBean;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.jmx.JmxGetter;
 import voldemort.annotations.jmx.JmxManaged;
@@ -66,7 +67,7 @@ import voldemort.annotations.jmx.JmxSetter;
 public class JmxUtils {
 
     private static final Object LOCK = new Object();
-    private static final Logger logger = Logger.getLogger(JmxUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JmxUtils.class);
 
     /**
      * Create a model mbean from an object using the description given in the

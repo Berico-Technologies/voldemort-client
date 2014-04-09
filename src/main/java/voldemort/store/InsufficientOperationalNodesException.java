@@ -21,8 +21,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.cluster.Node;
 
@@ -37,7 +38,7 @@ public class InsufficientOperationalNodesException extends VoldemortException {
 
     private Collection<? extends Throwable> causes;
 
-    private static final Logger logger = Logger.getLogger(InsufficientOperationalNodesException.class);
+    private static final Logger logger = LoggerFactory.getLogger(InsufficientOperationalNodesException.class);
 
     public InsufficientOperationalNodesException(String s, Throwable e) {
         super(s, e);

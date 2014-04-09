@@ -8,8 +8,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.management.MBeanOperationInfo;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.annotations.jmx.JmxOperation;
 import voldemort.cluster.Node;
 import voldemort.routing.RoutingStrategy;
@@ -29,7 +30,7 @@ import com.google.common.collect.Maps;
 public class RepairJob implements Runnable {
 
     private final static int DELETE_BATCH_SIZE = 10000;
-    private final static Logger logger = Logger.getLogger(RepairJob.class.getName());
+    private final static Logger logger = LoggerFactory.getLogger(RepairJob.class.getName());
 
     public final static List<String> blackList = Arrays.asList("mysql", "krati", "read-only");
 
@@ -113,7 +114,7 @@ public class RepairJob implements Runnable {
                 }
             }
         } catch(Exception e) {
-            logger.error(e, e);
+            logger.error(e.getMessage(), e);
         } finally {
             closeIterator(iterator);
             this.repairPermits.release();

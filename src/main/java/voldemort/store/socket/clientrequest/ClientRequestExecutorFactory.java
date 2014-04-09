@@ -33,9 +33,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.store.socket.SocketDestination;
 import voldemort.store.stats.ClientSocketStats;
 import voldemort.utils.DaemonThreadFactory;
@@ -61,7 +62,7 @@ public class ClientRequestExecutorFactory implements
     private final ExecutorService selectorManagerThreadPool;
     private final AtomicInteger counter = new AtomicInteger();
     private final Map<SocketDestination, Long> lastClosedTimestamps;
-    private final Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ClientSocketStats stats;
 
     public ClientRequestExecutorFactory(int selectors,
@@ -146,8 +147,8 @@ public class ClientRequestExecutorFactory implements
                 try {
                     socketChannel.close();
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(e, e);
+                    if(logger.isWarnEnabled())
+                        logger.warn(e.getMessage(), e);
                 }
 
                 throw new ConnectException("Cannot connect socket " + numCreated + " for "
@@ -166,8 +167,8 @@ public class ClientRequestExecutorFactory implements
                 currWaitTime = Math.min(currWaitTime + prevWaitTime, 50);
                 prevWaitTime = currWaitTime - prevWaitTime;
             } catch(InterruptedException e) {
-                if(logger.isEnabledFor(Level.WARN))
-                    logger.warn(e, e);
+                if(logger.isWarnEnabled())
+                    logger.warn(e.getMessage(), e);
             }
         }
 
@@ -215,8 +216,8 @@ public class ClientRequestExecutorFactory implements
             try {
                 socketChannel.close();
             } catch(Exception ex) {
-                if(logger.isEnabledFor(Level.WARN))
-                    logger.warn(ex, ex);
+                if(logger.isWarnEnabled())
+                    logger.warn(ex.getMessage(), ex);
             }
 
             throw e;
@@ -288,7 +289,7 @@ public class ClientRequestExecutorFactory implements
                 try {
                     selectorManagers[i].close();
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
+                    if(logger.isWarnEnabled())
                         logger.warn(e.getMessage(), e);
                 }
             }
@@ -305,12 +306,12 @@ public class ClientRequestExecutorFactory implements
                                                                             TimeUnit.MILLISECONDS);
 
             if(!terminated) {
-                if(logger.isEnabledFor(Level.WARN))
+                if(logger.isWarnEnabled())
                     logger.warn("SelectorManager thread pool did not stop cleanly after "
                                 + SHUTDOWN_TIMEOUT_MS + " ms");
             }
         } catch(Exception e) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn(e.getMessage(), e);
         }
     }
@@ -360,12 +361,12 @@ public class ClientRequestExecutorFactory implements
 
                         break;
                     } catch(Exception e) {
-                        if(logger.isEnabledFor(Level.ERROR))
+                        if(logger.isErrorEnabled())
                             logger.error(e.getMessage(), e);
                     }
                 }
             } catch(Exception e) {
-                if(logger.isEnabledFor(Level.ERROR))
+                if(logger.isErrorEnabled())
                     logger.error(e.getMessage(), e);
             }
 
@@ -390,13 +391,13 @@ public class ClientRequestExecutorFactory implements
                         try {
                             clientRequestExecutor.checkTimeout(selectionKey);
                         } catch(Exception e) {
-                            if(logger.isEnabledFor(Level.ERROR))
+                            if(logger.isErrorEnabled())
                                 logger.error(e.getMessage(), e);
                         }
                     }
                 }
             } catch(Exception e) {
-                if(logger.isEnabledFor(Level.ERROR))
+                if(logger.isErrorEnabled())
                     logger.error(e.getMessage(), e);
             }
         }

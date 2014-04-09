@@ -19,8 +19,9 @@ package voldemort.store.slop;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.cluster.Node;
 import voldemort.cluster.failuredetector.FailureDetector;
 import voldemort.serialization.Serializer;
@@ -47,7 +48,7 @@ import voldemort.versioning.Versioned;
  */
 public class HintedHandoff {
 
-    private static final Logger logger = Logger.getLogger(HintedHandoff.class);
+    private static final Logger logger = LoggerFactory.getLogger(HintedHandoff.class);
 
     private static final Serializer<Slop> slopSerializer = new SlopSerializer();
 
@@ -210,7 +211,7 @@ public class HintedHandoff {
                                                           / Time.NS_PER_MS, e);
                     logger.warn("Error during hinted handoff", e);
                 } catch(ObsoleteVersionException e) {
-                    logger.debug(e, e);
+                    logger.debug("", e);
                 }
 
                 if(logger.isDebugEnabled())

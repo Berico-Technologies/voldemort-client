@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.routing.RoutingStrategy;
 import voldemort.store.PersistenceFailureException;
 import voldemort.store.StoreBinaryFormat;
@@ -48,7 +49,7 @@ import com.sleepycat.je.OperationStatus;
  */
 public class PartitionPrefixedBdbStorageEngine extends BdbStorageEngine {
 
-    private static final Logger logger = Logger.getLogger(PartitionPrefixedBdbStorageEngine.class);
+    private static final Logger logger = LoggerFactory.getLogger(PartitionPrefixedBdbStorageEngine.class);
     private final RoutingStrategy routingStrategy;
 
     public PartitionPrefixedBdbStorageEngine(String name,
@@ -69,7 +70,7 @@ public class PartitionPrefixedBdbStorageEngine extends BdbStorageEngine {
                 cursor.setCacheMode(CacheMode.EVICT_BIN);
             return new BdbPartitionEntriesIterator(cursor, partition, this);
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         }
     }
@@ -83,7 +84,7 @@ public class PartitionPrefixedBdbStorageEngine extends BdbStorageEngine {
                 cursor.setCacheMode(CacheMode.EVICT_BIN);
             return new BdbPartitionKeysIterator(cursor, partition, this);
         } catch(DatabaseException e) {
-            logger.error(e);
+            logger.error("", e);
             throw new PersistenceFailureException(e);
         }
     }
@@ -191,7 +192,7 @@ public class PartitionPrefixedBdbStorageEngine extends BdbStorageEngine {
                     this.cache.add(Pair.create(key, val));
                 return true;
             } catch(DatabaseException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new PersistenceFailureException(e);
             }
         }
@@ -262,7 +263,7 @@ public class PartitionPrefixedBdbStorageEngine extends BdbStorageEngine {
                 current = new ByteArray(StoreBinaryFormat.extractKey(keyEntry.getData()));
                 return true;
             } catch(DatabaseException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new PersistenceFailureException(e);
             }
         }

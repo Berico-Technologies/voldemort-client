@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import voldemort.VoldemortException;
 import voldemort.store.Store;
@@ -39,7 +39,7 @@ public class ThreadPoolBasedNonblockingStoreImpl implements NonblockingStore {
 
     private final Store<ByteArray, byte[], byte[]> innerStore;
 
-    private final Logger logger = Logger.getLogger(ThreadPoolBasedNonblockingStoreImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ThreadPoolBasedNonblockingStoreImpl.class);
 
     public ThreadPoolBasedNonblockingStoreImpl(ExecutorService executor,
                                                Store<ByteArray, byte[], byte[]> innerStore) {
@@ -135,8 +135,8 @@ public class ThreadPoolBasedNonblockingStoreImpl implements NonblockingStore {
                             try {
                                 callback.requestComplete(result, diff / Time.NS_PER_MS);
                             } catch(Exception e) {
-                                if(logger.isEnabledFor(Level.WARN))
-                                    logger.warn(e, e);
+                                if(logger.isWarnEnabled())
+                                    logger.warn("", e);
                             }
                         } else {
                             UnreachableStoreException ex = new UnreachableStoreException("Failure in "
@@ -145,8 +145,8 @@ public class ThreadPoolBasedNonblockingStoreImpl implements NonblockingStore {
                             try {
                                 callback.requestComplete(ex, diff);
                             } catch(Exception e) {
-                                if(logger.isEnabledFor(Level.WARN))
-                                    logger.warn(e, e);
+                                if(logger.isWarnEnabled())
+                                    logger.warn("", e);
                             }
                         }
                     }
@@ -157,8 +157,8 @@ public class ThreadPoolBasedNonblockingStoreImpl implements NonblockingStore {
                         try {
                             callback.requestComplete(e, diff / Time.NS_PER_MS);
                         } catch(Exception ex) {
-                            if(logger.isEnabledFor(Level.WARN))
-                                logger.warn(ex, ex);
+                            if(logger.isWarnEnabled())
+                                logger.warn("", ex);
                         }
                     }
                 }

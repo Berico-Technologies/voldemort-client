@@ -20,8 +20,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.jmx.JmxGetter;
 import voldemort.annotations.jmx.JmxSetter;
@@ -59,7 +60,7 @@ import com.google.common.collect.Multimap;
  */
 public class RedirectingStore extends DelegatingStore<ByteArray, byte[], byte[]> {
 
-    private final static Logger logger = Logger.getLogger(RedirectingStore.class);
+    private final static Logger logger = LoggerFactory.getLogger(RedirectingStore.class);
     private final MetadataStore metadata;
     private final StoreRepository storeRepository;
     private final SocketStoreFactory storeFactory;

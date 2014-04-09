@@ -22,8 +22,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.store.InsufficientOperationalNodesException;
 import voldemort.store.routed.action.Action;
@@ -85,7 +86,7 @@ public class Pipeline {
 
     private final Map<Event, Action> eventActions;
 
-    private final Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private volatile boolean enableHintedHandoff = false;
 

@@ -25,8 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.cluster.Node;
 import voldemort.routing.RoutingStrategy;
 import voldemort.serialization.Serializer;
@@ -47,7 +48,7 @@ import com.google.common.collect.Maps;
  */
 public class StoreUtils {
 
-    private static Logger logger = Logger.getLogger(StoreUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(StoreUtils.class);
 
     public static void assertValidKeys(Iterable<?> keys) {
         if(keys == null)

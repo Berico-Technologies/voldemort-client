@@ -31,9 +31,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.management.MBeanOperationInfo;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.annotations.jmx.JmxOperation;
 import voldemort.client.rebalance.RebalancePartitionsInfo;
@@ -113,7 +114,7 @@ public class MetadataStore implements StorageEngine<ByteArray, byte[], byte[]> {
 
     private final ConcurrentHashMap<String, MetadataStoreListener> storeNameTolisteners;
 
-    private static final Logger logger = Logger.getLogger(MetadataStore.class);
+    private static final Logger logger = LoggerFactory.getLogger(MetadataStore.class);
 
     public MetadataStore(Store<String, String, String> innerStore, int nodeId) {
         this.innerStore = innerStore;
@@ -355,8 +356,8 @@ public class MetadataStore implements StorageEngine<ByteArray, byte[], byte[]> {
                     storeNameTolisteners.get(storeName)
                                         .updateRoutingStrategy(updatedRoutingStrategy);
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
-                        logger.warn(e, e);
+                    if(logger.isWarnEnabled())
+                        logger.warn(e.getMessage(), e);
                 }
             }
 

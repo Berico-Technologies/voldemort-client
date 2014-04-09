@@ -14,8 +14,9 @@ import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.cluster.Node;
 import voldemort.routing.RoutingStrategy;
@@ -37,7 +38,7 @@ import com.google.common.collect.Lists;
  */
 public class ChunkedFileSet {
 
-    private static Logger logger = Logger.getLogger(ChunkedFileSet.class);
+    private static Logger logger = LoggerFactory.getLogger(ChunkedFileSet.class);
 
     private final int numChunks;
     private final int nodeId;
@@ -568,7 +569,7 @@ public class ChunkedFileSet {
                 // Return the key
                 return new ByteArray(keyBuffer.array());
             } catch(IOException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new VoldemortException(e);
             }
 
@@ -614,7 +615,7 @@ public class ChunkedFileSet {
                                                                   keySize,
                                                                   keySize + valueSize)));
             } catch(IOException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new VoldemortException(e);
             }
         }
@@ -683,7 +684,7 @@ public class ChunkedFileSet {
 
                 return Pair.create(keyBuffer, finalValue);
             } catch(IOException e) {
-                logger.error(e);
+                logger.error("", e);
                 throw new VoldemortException(e);
             } finally {
                 md5er.reset();

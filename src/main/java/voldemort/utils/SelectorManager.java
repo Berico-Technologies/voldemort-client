@@ -23,9 +23,10 @@ import java.nio.channels.Selector;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 
 /**
@@ -96,7 +97,7 @@ public class SelectorManager implements Runnable {
 
     protected final AtomicBoolean isClosed;
 
-    protected final Logger logger = Logger.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     public SelectorManager() {
         try {
@@ -122,7 +123,7 @@ public class SelectorManager implements Runnable {
 
                     sk.channel().close();
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
+                    if(logger.isWarnEnabled())
                         logger.warn(e.getMessage(), e);
                 }
 
@@ -132,19 +133,19 @@ public class SelectorManager implements Runnable {
 
                     sk.cancel();
                 } catch(Exception e) {
-                    if(logger.isEnabledFor(Level.WARN))
+                    if(logger.isWarnEnabled())
                         logger.warn(e.getMessage(), e);
                 }
             }
         } catch(Exception e) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn(e.getMessage(), e);
         }
 
         try {
             selector.close();
         } catch(Exception e) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn(e.getMessage(), e);
         }
     }
@@ -201,18 +202,18 @@ public class SelectorManager implements Runnable {
 
                     break;
                 } catch(Throwable t) {
-                    if(logger.isEnabledFor(Level.ERROR))
+                    if(logger.isErrorEnabled())
                         logger.error(t.getMessage(), t);
                 }
             }
         } catch(Throwable t) {
-            if(logger.isEnabledFor(Level.ERROR))
+            if(logger.isErrorEnabled())
                 logger.error(t.getMessage(), t);
         } finally {
             try {
                 close();
             } catch(Exception e) {
-                if(logger.isEnabledFor(Level.ERROR))
+                if(logger.isErrorEnabled())
                     logger.error(e.getMessage(), e);
             }
         }

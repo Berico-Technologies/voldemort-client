@@ -26,7 +26,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
-import org.apache.log4j.Level;
+
 
 import voldemort.utils.SelectorManagerWorker;
 import voldemort.utils.Time;
@@ -78,7 +78,7 @@ public class ClientRequestExecutor extends SelectorManagerWorker {
         if(System.nanoTime() <= expiration)
             return true;
 
-        if(logger.isEnabledFor(Level.WARN))
+        if(logger.isWarnEnabled())
             logger.warn("Client request associated with " + socketChannel.socket() + " timed out");
 
         isExpired = true;
@@ -139,7 +139,7 @@ public class ClientRequestExecutor extends SelectorManagerWorker {
                                  + ", assuming initial protocol negotiation");
             }
         } else {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn("Client associated with " + socketChannel.socket()
                             + " did not successfully buffer output for request");
 
@@ -256,7 +256,7 @@ public class ClientRequestExecutor extends SelectorManagerWorker {
 
     private synchronized void completeClientRequest() {
         if(clientRequest == null) {
-            if(logger.isEnabledFor(Level.WARN))
+            if(logger.isWarnEnabled())
                 logger.warn("No client associated with " + socketChannel.socket());
 
             return;

@@ -26,8 +26,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.client.protocol.RequestFormatType;
 import voldemort.cluster.Cluster;
 import voldemort.cluster.Node;
@@ -81,7 +82,7 @@ public abstract class AbstractStoreClientFactory implements StoreClientFactory {
 
     protected static final ClusterMapper clusterMapper = new ClusterMapper();
     private static final StoreDefinitionsMapper storeMapper = new StoreDefinitionsMapper();
-    protected static final Logger logger = Logger.getLogger(AbstractStoreClientFactory.class);
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractStoreClientFactory.class);
 
     private static final Serializer<ByteArray> slopKeySerializer = new ByteArraySerializer();
     private static final Serializer<Slop> slopValueSerializer = new SlopSerializer();

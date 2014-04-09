@@ -27,8 +27,9 @@ import java.util.Map.Entry;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.VoldemortUnsupportedOperationalException;
 import voldemort.annotations.jmx.JmxGetter;
@@ -56,7 +57,7 @@ import com.google.common.collect.Lists;
  */
 public class ReadOnlyStorageEngine implements StorageEngine<ByteArray, byte[], byte[]> {
 
-    private static Logger logger = Logger.getLogger(ReadOnlyStorageEngine.class);
+    private static Logger logger = LoggerFactory.getLogger(ReadOnlyStorageEngine.class);
 
     private final String name;
     private final int numBackups, nodeId;
@@ -386,7 +387,7 @@ public class ReadOnlyStorageEngine implements StorageEngine<ByteArray, byte[], b
                     logger.info("Deleting of " + file.getAbsolutePath()
                                 + " completed successfully.");
                 } catch(Exception e) {
-                    logger.error(e);
+                    logger.error("", e);
                 }
             }
         }, "background-file-delete").start();

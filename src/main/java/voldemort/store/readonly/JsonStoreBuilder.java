@@ -39,8 +39,9 @@ import java.util.Map.Entry;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.cluster.Cluster;
 import voldemort.cluster.Node;
@@ -74,7 +75,7 @@ import com.google.common.collect.Maps;
  */
 public class JsonStoreBuilder {
 
-    private static final Logger logger = Logger.getLogger(JsonStoreBuilder.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonStoreBuilder.class);
 
     private final JsonReader reader;
     private final Cluster cluster;

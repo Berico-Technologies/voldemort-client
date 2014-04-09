@@ -1,13 +1,14 @@
 package voldemort.utils;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DynamicThrottleLimit {
 
     private long perNodeRate = 0l;
     private long dynamicRatePerSecond = 0l;
     private int numJobs = 0;
-    private final static Logger logger = Logger.getLogger(DynamicThrottleLimit.class);
+    private final static Logger logger = LoggerFactory.getLogger(DynamicThrottleLimit.class);
 
     public DynamicThrottleLimit(long val) {
         this.dynamicRatePerSecond = this.perNodeRate = val;

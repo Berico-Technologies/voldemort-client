@@ -18,8 +18,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.cluster.Cluster;
 import voldemort.cluster.Node;
@@ -32,7 +33,7 @@ import com.google.common.collect.Maps;
 
 public class HttpStoreSwapper extends StoreSwapper {
 
-    private static final Logger logger = Logger.getLogger(HttpStoreSwapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpStoreSwapper.class);
 
     private final HttpClient httpClient;
     private final String readOnlyMgmtPath;

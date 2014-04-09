@@ -27,8 +27,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.RequestFormatType;
 import voldemort.store.socket.SocketDestination;
@@ -43,7 +44,7 @@ import voldemort.utils.pool.ResourceFactory;
  */
 public class SocketResourceFactory implements ResourceFactory<SocketDestination, SocketAndStreams> {
 
-    public static final Logger logger = Logger.getLogger(SocketResourceFactory.class);
+    public static final Logger logger = LoggerFactory.getLogger(SocketResourceFactory.class);
 
     private final int soTimeoutMs;
     private final int socketBufferSize;

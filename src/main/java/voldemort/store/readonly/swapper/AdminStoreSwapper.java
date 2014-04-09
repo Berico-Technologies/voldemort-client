@@ -9,8 +9,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.admin.AdminClient;
 import voldemort.cluster.Cluster;
@@ -23,7 +24,7 @@ import com.google.common.collect.Maps;
 
 public class AdminStoreSwapper extends StoreSwapper {
 
-    private static final Logger logger = Logger.getLogger(AdminStoreSwapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminStoreSwapper.class);
 
     private AdminClient adminClient;
     private long timeoutMs;

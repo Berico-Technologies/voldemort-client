@@ -25,8 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.client.protocol.RequestFormat;
 import voldemort.common.VoldemortOpCode;
@@ -51,7 +52,7 @@ public class VoldemortNativeClientRequestFormat implements RequestFormat {
     private final ErrorCodeMapper mapper;
     private final int protocolVersion;
 
-    private final Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public VoldemortNativeClientRequestFormat(int protocolVersion) {
         this.mapper = new ErrorCodeMapper();

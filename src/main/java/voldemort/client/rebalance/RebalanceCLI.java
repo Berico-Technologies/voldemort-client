@@ -9,8 +9,9 @@ import java.util.Set;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import voldemort.VoldemortException;
 import voldemort.cluster.Cluster;
 import voldemort.store.StoreDefinition;
@@ -27,7 +28,7 @@ public class RebalanceCLI {
     private final static int SUCCESS_EXIT_CODE = 0;
     private final static int ERROR_EXIT_CODE = 1;
     private final static int HELP_EXIT_CODE = 2;
-    private final static Logger logger = Logger.getLogger(RebalanceCLI.class);
+    private final static Logger logger = LoggerFactory.getLogger(RebalanceCLI.class);
 
     public static void main(String[] args) throws Exception {
         int exitCode = ERROR_EXIT_CODE;
